@@ -33,9 +33,10 @@ public class FrequencyAnalysis
 
 	public static void main(String[] args) throws IOException
 	{	
+
 		String ciphertext = "";
 
-		BufferedReader r = new BufferedReader(new FileReader(new File("encrypted-en")));
+		BufferedReader r = new BufferedReader(new FileReader(new File("files/encrypted-fr")));
 		while (r.ready())
 			ciphertext += r.readLine();
 		r.close();
@@ -62,13 +63,10 @@ public class FrequencyAnalysis
 		String plaintext = "";
 		for (char ch : charArray)
 		{
-			if (ch >= 'A' && ch <= 'Z')
-				plaintext += cipherToPlain.get(ch);
-			else
-				plaintext += ch;
+			plaintext += cipherToPlain.get(ch);
 		}
 
-		System.out.println("Ciphertext: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z");
+		System.out.println("Ciphertxt :   : . ; , ' \" A B C D E F G H I J K L M N O P Q R S T U V W X Y Z");
 		System.out.print("Plaintext : ");
 		for (Character entry : cipherToPlain.values())
 			System.out.print(entry + " ");
@@ -81,23 +79,31 @@ public class FrequencyAnalysis
 	{
 		// table with i = char's position and frequencies[i] = frequency of char i
 		List<Letter> frequencies = new ArrayList<Letter>(Arrays.asList(
-				new Letter("A", 0.0), new Letter("B", 0.0),
-				new Letter("C", 0.0), new Letter("D", 0.0),
-				new Letter("E", 0.0), new Letter("F", 0.0),
-				new Letter("G", 0.0), new Letter("H", 0.0),
-				new Letter("I", 0.0), new Letter("J", 0.0),
-				new Letter("K", 0.0), new Letter("L", 0.0),
-				new Letter("M", 0.0), new Letter("N", 0.0),
-				new Letter("O", 0.0), new Letter("P", 0.0),
-				new Letter("Q", 0.0), new Letter("R", 0.0),
-				new Letter("S", 0.0), new Letter("T", 0.0),
-				new Letter("U", 0.0), new Letter("V", 0.0),
-				new Letter("W", 0.0), new Letter("X", 0.0),
-				new Letter("Y", 0.0), new Letter("Z", 0.0)));
+				new Letter(" ", 0.000), new Letter(":", 0.000),
+				new Letter(".", 0.000), new Letter(";", 0.000),
+				new Letter(",", 0.000), new Letter("'", 0.000), 
+				new Letter("\"", 0.000),new Letter("A", 0.000), new Letter("B", 0.000),
+				new Letter("C", 0.000), new Letter("D", 0.000),
+				new Letter("E", 0.000), new Letter("F", 0.000),
+				new Letter("G", 0.000), new Letter("H", 0.000),
+				new Letter("I", 0.000), new Letter("J", 0.000),
+				new Letter("K", 0.000), new Letter("L", 0.000),
+				new Letter("M", 0.000), new Letter("N", 0.000),
+				new Letter("O", 0.000), new Letter("P", 0.000),
+				new Letter("Q", 0.000), new Letter("R", 0.000),
+				new Letter("S", 0.000), new Letter("T", 0.000),
+				new Letter("U", 0.000), new Letter("V", 0.000),
+				new Letter("W", 0.000), new Letter("X", 0.000),
+				new Letter("Y", 0.000), new Letter("Z", 0.000)));
 
-		for (char c : charArray)
-			if (c >= 'A' && c <= 'Z')
-				frequencies.get(c - 'A').incrementFrequency();
+		for (char c : charArray) {
+			for (int i=0;i < frequencies.size();i++)
+			{
+				if (frequencies.get(i).getLetter() == c) {
+					frequencies.get(i).incrementFrequency();
+				}
+			}
+		}
 
 		Collections.sort(frequencies, c);
 
@@ -107,27 +113,12 @@ public class FrequencyAnalysis
 	private static List<Letter> initLetters()
 	{
 		/*
-		 * English dictionary.
-		 * 
-		 * List<Letter> letters = new ArrayList<Letter>(Arrays.asList(
-						new Letter("A", 8.167), new Letter("B", 1.492),
-						new Letter("C", 2.782), new Letter("D", 4.253),
-						new Letter("E", 12.702), new Letter("F", 2.228),
-						new Letter("G", 2.015), new Letter("H", 6.094),
-						new Letter("I", 6.966), new Letter("J", 0.153),
-						new Letter("K", 0.772), new Letter("L", 4.025),
-						new Letter("M", 2.406), new Letter("N", 6.749),
-						new Letter("O", 7.507), new Letter("P", 1.929),
-						new Letter("Q", 0.095), new Letter("R", 5.987),
-						new Letter("S", 6.327), new Letter("T", 9.056),
-						new Letter("U", 2.758), new Letter("V", 0.978),
-						new Letter("W", 2.361), new Letter("X", 0.150),
-						new Letter("Y", 1.974), new Letter("Z", 0.074)));*/
-
-		/*
 		 * French dictionary.
 		 */
 		List<Letter> letters = new ArrayList<Letter>(Arrays.asList(
+				new Letter(" ", 1.560), new Letter(":", 0.330),
+				new Letter(".", 0.830), new Letter(";", 0.040),
+				new Letter(",", 1.020), new Letter("'", 0.760), new Letter("\"", 0.080),
 				new Letter("A", 7.265), new Letter("B", 0.893),
 				new Letter("C", 3.029), new Letter("D", 3.538),
 				new Letter("E", 13.754), new Letter("F", 1.018),
