@@ -99,4 +99,33 @@ public class TranspoCypher {
             }
         return factors;
     }
+    
+    	public boolean findCorrespondenceDictionary(String messageDecode) throws IOException {
+		boolean possibility = false;
+		
+        BufferedReader r;
+		String ligne;
+		String [] mots = messageDecode.split(" ");
+		String [] motsDico;
+		
+		r = new BufferedReader(new FileReader("listemot.txt"));
+
+		while ((ligne=r.readLine())!=null){
+
+			motsDico = ligne.split("#");
+			if(mots[0].equals(motsDico[0]))
+			{
+				//System.out.println(motsDico[0]);
+				possibility = true;
+			}
+			
+			if(mots[1].equals(motsDico[0]))
+			{
+				//System.out.println(motsDico[0]);
+				possibility = true;
+			}
+		}
+		
+		return possibility;
+	}
 }
