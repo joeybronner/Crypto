@@ -117,26 +117,25 @@ public class TranspoCypher {
     }
 
     public static boolean findCorrespondenceDictionary(String messageDecode) throws IOException {
-        int possibility = -1;
+        boolean possibility = false;
+
         BufferedReader r;
         String ligne;
         String[] mots = messageDecode.split(" ");
         String[] motsDico;
 
-        r = new BufferedReader(new FileReader("files/listemot.txt"));
+        r = new BufferedReader(new FileReader("/files/listemot.txt"));
 
         while ((ligne = r.readLine()) != null) {
+
             motsDico = ligne.split("#");
             for (String mot: mots) {
-                if (mot.equals(motsDico[0]) && possibility != 0) {
-                    possibility = 1;
-                }
-                else {
-                    possibility = 0;
+                if (mot.equals(motsDico[0])) {
+                    possibility = true;
                 }
             }
         }
 
-        return (possibility == 1);
+        return possibility;
     }
 }
