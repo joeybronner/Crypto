@@ -53,7 +53,7 @@ public class TranspoCypher {
 
         for (int size : sizes) {
             int[] r = range(size);
-            permute(r, size, list);
+            permute(r, 0);
         }
         for (int[] keys: list) {
             String decoded = decode(encoded, keys);
@@ -70,25 +70,21 @@ public class TranspoCypher {
     }
 
     static ArrayList<int[]> list = new ArrayList<int[]>();
-
-    public static int[] range(int stop) {
-        int[] result = new int[stop];
-
-        for (int i = 0; i < stop; i++)
-            result[i] = i;
-
-        return result;
-    }
-
-    static void permute(int[] a, int k, ArrayList<int[]> list) {
-        if (k == a.length) {
+    static void permute(int[] a, int k)
+    {
+        if (k == a.length)
+        {
+            System.out.println("toto");
             list.add(a.clone());
-        } else {
-            for (int i = k; i < a.length; i++) {
+        }
+        else
+        {
+            for (int i = k; i < a.length; i++)
+            {
                 int temp = a[k];
                 a[k] = a[i];
                 a[i] = temp;
-                permute(a, k + 1, list);
+                permute(a, k + 1);
                 temp = a[k];
                 a[k] = a[i];
                 a[i] = temp;
@@ -96,11 +92,23 @@ public class TranspoCypher {
         }
     }
 
-    public static TreeSet<Integer> factors(int n) {
+    public static int[] range(int stop)
+    {
+        int[] result = new int[stop];
+
+        for(int i=0;i<stop;i++)
+            result[i] = i;
+
+        return result;
+    }
+
+    public static TreeSet<Integer> factors(int n)
+    {
         TreeSet<Integer> factors = new TreeSet<Integer>();
         factors.add(n);
-        for (long test = n - 1; test >= Math.sqrt(n); test--)
-            if (n % test == 0) {
+        for(long test = n - 1; test >= Math.sqrt(n); test--)
+            if(n % test == 0)
+            {
                 factors.add((int) test);
                 factors.add((int) (n / test));
             }
@@ -115,7 +123,7 @@ public class TranspoCypher {
         String[] mots = messageDecode.split(" ");
         String[] motsDico;
 
-        r = new BufferedReader(new FileReader("files/listemot.txt"));
+        r = new BufferedReader(new FileReader("/files/listemot.txt"));
 
         while ((ligne = r.readLine()) != null) {
 
