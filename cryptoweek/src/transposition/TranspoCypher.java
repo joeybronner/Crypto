@@ -1,6 +1,7 @@
 package transposition;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.TreeSet;
 
 public class TranspoCypher {
     static int[] key = {2, 4, 0, 1, 3};
@@ -44,21 +45,58 @@ public class TranspoCypher {
     }
 
     public static void cipher(String encoded) {
-        int keyLenght = 2;
         boolean continues = true;
+        TreeSet<Integer> sizes = factors(encoded.length());
 
-        while (keyLenght != encoded.length() && continues) {
-            // generatePossibleKeys
-            List<Integer[]> keys = generatePossibleKeys(keyLenght);
-            //for (int[] key: keys) {
-                System.out.println(decode(encoded, key));
-            //}
-            keyLenght ++;
+        for(int size: sizes) {
+            int[] r = range(size);
+            permute(r, size, list);
+            System.out.println("");
         }
     }
 
-    private static List<Integer[]> generatePossibleKeys(int keyLenght) {
-        //get all the possible keys permutation
-        return null;
+    static ArrayList<int[]> list = new ArrayList<int[]>();
+    public static int[] range(int stop)
+    {
+        int[] result = new int[stop];
+
+        for(int i=0;i<stop;i++)
+            result[i] = i;
+
+        return result;
+    }
+
+    static void permute(int[] a, int k, ArrayList<int[]> list)
+    {
+        if (k == a.length)
+        {
+            list.add(a.clone());
+        }
+        else
+        {
+            for (int i = k; i < a.length; i++)
+            {
+                int temp = a[k];
+                a[k] = a[i];
+                a[i] = temp;
+                permute(a, k + 1, list);
+                temp = a[k];
+                a[k] = a[i];
+                a[i] = temp;
+            }
+        }
+    }
+
+    public static TreeSet<Integer> factors(int n)
+    {
+        TreeSet<Integer> factors = new TreeSet<Integer>();
+        factors.add(n);
+        for(long test = n - 1; test >= Math.sqrt(n); test--)
+            if(n % test == 0)
+            {
+                factors.add((int) test);
+                factors.add((int) (n / test));
+            }
+        return factors;
     }
 }
