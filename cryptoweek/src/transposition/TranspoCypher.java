@@ -1,6 +1,5 @@
 package transposition;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TranspoCypher {
@@ -44,41 +43,22 @@ public class TranspoCypher {
         return decodedString;
     }
 
-    public static String cipher(String encoded) {
+    public static void cipher(String encoded) {
         int keyLenght = 2;
         boolean continues = true;
 
         while (keyLenght != encoded.length() && continues) {
             // generatePossibleKeys
             List<Integer[]> keys = generatePossibleKeys(keyLenght);
-            for (int[] key: keys) {
+            //for (int[] key: keys) {
                 System.out.println(decode(encoded, key));
-            }
+            //}
             keyLenght ++;
         }
     }
 
     private static List<Integer[]> generatePossibleKeys(int keyLenght) {
-        List<Integer[]> list = new ArrayList<Integer[keyLenght]>();
-        for(int i = 0; i < keyLenght; i++) {
-            for(int j = 0; j < keyLenght - 1 ; j++) {
-                Integer[] keys;
-                if (list.get(i) == null) {
-                    list.add(new Integer[keyLenght]);
-                }
-                keys = list.get(i);
-                keys[i] = i;
-            }
-        }
-        return list;
-        /*
-        abcd
-        abdc
-
-
-
-
-        */
-
+        //get all the possible keys permutation
+        return null;
     }
 }
