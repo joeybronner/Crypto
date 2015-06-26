@@ -124,19 +124,18 @@ public class TranspoCypher {
         String[] mots = messageDecode.split(" ");
         String[] motsDico;
 
-        r = new BufferedReader(new FileReader("/files/listemot.txt"));
+        r = new BufferedReader(new FileReader("files/listemot.txt"));
 
         while ((ligne = r.readLine()) != null) {
 
             motsDico = ligne.split("#");
-            if (mots[0].equals(motsDico[0])) {
-                //System.out.println(motsDico[0]);
-                possibility = true;
-            }
-
-            if (mots[1].equals(motsDico[0])) {
-                //System.out.println(motsDico[0]);
-                possibility = true;
+            for (String mot: mots) {
+                if (mot.equals(motsDico[0]) && !possibility) {
+                    possibility = true;
+                }
+                else {
+                    possibility = false;
+                }
             }
         }
 
