@@ -52,8 +52,10 @@ public class TranspoCypher {
         TreeSet<Integer> sizes = factors(encoded.length());
 
         for (int size : sizes) {
-            int[] r = range(size);
-            permute(r, 0);
+            if (size <= 10) {
+                int[] r = range(size);
+                permute(r, 0);
+            }
         }
         for (int[] keys: list) {
             String decoded = decode(encoded, keys);
@@ -74,7 +76,6 @@ public class TranspoCypher {
     {
         if (k == a.length)
         {
-            System.out.println("toto");
             list.add(a.clone());
         }
         else
