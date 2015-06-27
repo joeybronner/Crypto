@@ -1,7 +1,10 @@
 package transposition;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.esgi.crypto.AttackTransposition;
 
 public class Transposition {
 
@@ -10,16 +13,7 @@ public class Transposition {
 	static int KEY_LENGTH;
 
 	public static void main(String[] args) {
-		INPUT = "VOICI UN MESSAGE CLAIR   ";
-		KEY = "24013";	
-		KEY_LENGTH = KEY.length();
-
-		System.out.println("--- Encoding by transposition");
-		String encoded = encode();
-
-		System.out.println("\n\n--- Encoding by transposition");
-		String decoded = decode(encoded);
-
+		new AttackTransposition().execute(new File(args[0]), new File(args[1]), new File(args[2]));
 
 	}
 
